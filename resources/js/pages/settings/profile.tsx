@@ -22,6 +22,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 type ProfileForm = {
     name: string;
     email: string;
+    role: number;
 }
 
 export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: boolean; status?: string }) {
@@ -30,6 +31,7 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
     const { data, setData, patch, errors, processing, recentlySuccessful } = useForm<Required<ProfileForm>>({
         name: auth.user.name,
         email: auth.user.email,
+        role: auth.user.role,
     });
 
     const submit: FormEventHandler = (e) => {
@@ -80,6 +82,10 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
                             />
 
                             <InputError className="mt-2" message={errors.email} />
+                        </div>
+
+                        <div className='text-sm ps-2 bg-blue-400/30 py-3 rounded-md'>
+                            <span>Role: {data.role? `user`: `admin`}</span>
                         </div>
 
                         {mustVerifyEmail && auth.user.email_verified_at === null && (
