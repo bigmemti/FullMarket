@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Enums\UserRole;
 
 uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
 
@@ -12,4 +13,9 @@ test('authenticated users can visit the dashboard', function () {
     $this->actingAs($user = User::factory()->create());
 
     $this->get('/dashboard')->assertOk();
+});
+
+test('admin can\'t visit the dashboard', function () {
+    $this->actingAs($user = User::factory()->create(['role' => UserRole::Admin]));
+    $this->get('/dashboard')->assertForbidden();
 });
