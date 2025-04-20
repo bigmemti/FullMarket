@@ -20,5 +20,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
             'role' => 0,
         ]);
+
+        \App\Models\Brand::factory(10)->create();
     }
 }

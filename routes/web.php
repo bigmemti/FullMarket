@@ -1,16 +1,28 @@
 <?php
+
+use App\Http\Controllers\BrandController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 
-Route::get('/', function () {
-    return Inertia::render('welcome');
-})->name('home');
+Route::get('/', function () { return Inertia::render('welcome'); })->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('dashboard', function () {
-        return Inertia::render('dashboard');
-    })->name('dashboard');
+    Route::prefix('dashboard')->group(function () {
+        Route::get('/', function () { return Inertia::render('dashboard'); })->name('dashboard');
+        
+        Route::name('dashboard.')->group(function () {});
+    });
+    
+    Route::middleware(['can:isAdmin'])->prefix('panel')->group(function () {
+        Route::get('/', function () { return Inertia::render('dashboard'); })->name('panel');
+
+        Route::name('panel.')->group(function(){
+            Route::resources([
+                'brand' => BrandController::class,
+            ]);
+        });
+    });
 });
 
 
