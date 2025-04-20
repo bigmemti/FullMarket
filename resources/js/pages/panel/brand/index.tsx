@@ -2,9 +2,9 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogFooter, DialogDescription, DialogTitle, DialogHeader, DialogContent, DialogTrigger, DialogClose } from "@/components/ui/dialog";
 import AppLayout from "@/layouts/app-layout";
 import { Brand, BreadcrumbItem } from "@/types";
-import { Head, Link, router, useForm } from "@inertiajs/react";
+import { Head, Link, router } from "@inertiajs/react";
 import dayjs from 'dayjs';
-import { Eye, ImageOff, Pencil, Trash } from "lucide-react";
+import { Eye, Pencil, Trash } from "lucide-react";
 import { useState } from "react";
 
 const breadcrumb: BreadcrumbItem[] =[

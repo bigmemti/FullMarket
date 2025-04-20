@@ -2,7 +2,7 @@ import { DialogClose, DialogHeader, DialogTitle, DialogTrigger, Dialog, DialogCo
 import { Button } from "@/components/ui/button";
 import AppLayout from "@/layouts/app-layout";
 import { Brand, BreadcrumbItem } from "@/types";
-import { Head, Link, useForm } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import dayjs from "dayjs";
 import { Pencil, Trash } from "lucide-react";
 
@@ -22,17 +22,6 @@ export default function Show({ brand }: { brand: Brand }) {
             href: route('panel.brand.show', {brand}),
         },
     ];
-
-    const deleteBrand = (id: number) => {
-        const { data, setData, post, processing, errors } = useForm({
-            id: id,
-        });
-
-        const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-            e.preventDefault();
-            post(route('panel.brand.destroy', {brand: id}));
-        }
-    }
 
     return (
         <AppLayout breadcrumbs={breadcrumb}>
@@ -83,7 +72,7 @@ export default function Show({ brand }: { brand: Brand }) {
                                             Cancel
                                         </Button>
                                     </DialogClose>
-                                    <Button className="cursor-pointer" variant="destructive" onClick={() => deleteBrand(brand.id)}>
+                                    <Button className="cursor-pointer" variant="destructive">
                                         Delete
                                     </Button>
                                 </DialogFooter>
