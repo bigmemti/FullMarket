@@ -1,6 +1,6 @@
+import { FileInput, TextInput, Form, FormContainer, ProgressBar } from "@/components/form";
+import DashboardHeader from "@/components/dashboard/header";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import AppLayout from "@/layouts/app-layout";
 import { Brand, BreadcrumbItem } from "@/types";
 import { Head, useForm } from "@inertiajs/react";
@@ -27,7 +27,13 @@ export default function Edit({brand}: {brand: Brand}){
         },
     ];
 
-    const { data, setData, post, errors, processing, progress } = useForm({
+    interface BrandForm {
+        name: string;
+        image: File | null;
+        _method: string;
+    }
+
+    const { data, setData, post, errors, processing, progress } = useForm<Required<BrandForm>>({
         name: brand.name, 
         image: null,
         _method: 'PUT',
@@ -41,37 +47,18 @@ export default function Edit({brand}: {brand: Brand}){
     return(
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Edit Brand"/>
-            <div className="w-lg mx-auto mt-12">
-                <h3>Brand Edit Form</h3>
-                <form onSubmit={submit} encType="multipart/form-data">
-                    <Label htmlFor="name" >Name</Label>
-                    <Input
-                        id="name"
-                        value={data.name}
-                        onChange={(event) => {setData('name', event.target.value)}}
-                    />
-                    {errors.name && (
-                        <p className="text-sm text-red-500">{errors.name}</p>
-                    )}
+            <DashboardHeader title="Edit Brand" />
+            <FormContainer>
+                <Form onSubmit={submit}>
+                    <TextInput label="Name" name="name" value={data.name} onChange={e => setData('name', e.target.value)} errors={errors.name} />
                     
-                    <Label htmlFor="image" >Image</Label>
-                    <Input
-                        id="image"
-                        type="file"
-                        onChange={(e) => setData('image', e.target.files[0])}
-                    />
-                    {errors.image && (
-                        <p className="text-sm text-red-500">{errors.image}</p>
-                    )}
-                    {progress && (
-                        <progress className="w-full mt-2" value={progress.percentage} max="100">
-                            {progress.percentage}%
-                        </progress>
-                    )}
+                    <FileInput label="Image" name="image" onChange={e => setData('image', e.target.files?.[0] ?? null)} errors={errors.image} />
+
+                    {progress && <ProgressBar progress={progress.percentage ?? 0} />}
 
                     <Button disabled={processing} className="cursor-pointer mt-4 w-full">{processing ? 'Updating ...' : 'Update'}</Button>
-                </form>
-            </div>
+                </Form>
+            </FormContainer>
         </AppLayout>
     )
 }
