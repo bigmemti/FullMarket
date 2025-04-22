@@ -1,13 +1,10 @@
 import { FormEventHandler } from "react";
 import AppLayout from "@/layouts/app-layout";
-import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Head, useForm } from "@inertiajs/react";
-import InputError from "@/components/input-error";
 import { BreadcrumbItem, Category } from "@/types";
 import DashboardHeader from "@/components/dashboard/header";
 import { TextInput, FileInput, Form, FormContainer, ProgressBar, CheckboxInput, SelectInput } from "@/components/form";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 const breadcrumbs: BreadcrumbItem[] = [
     {

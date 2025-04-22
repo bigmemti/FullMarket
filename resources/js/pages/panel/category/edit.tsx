@@ -1,10 +1,8 @@
 import { FormEventHandler } from "react";
 import AppLayout from "@/layouts/app-layout";
-import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Head, useForm } from "@inertiajs/react";
 import { BreadcrumbItem, Category } from "@/types";
-import { Checkbox } from "@/components/ui/checkbox";
 import DashboardHeader from "@/components/dashboard/header";
 import { TextInput, FileInput, Form, FormContainer, ProgressBar, SelectInput, CheckboxInput } from "@/components/form";
 
