@@ -23,8 +23,10 @@ class UpdateBrandRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'image' => 'image|nullable|max:4096'
+            'name' => 'nullable|string|max:255',
+            'slug' => 'nullable|string|max:255|unique:brands,slug,' . request()->brand->id,
+            'image' => 'nullable|image|max:4096',
+            'is_active' => 'nullable|boolean',
         ];
     }
 }

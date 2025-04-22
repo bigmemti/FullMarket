@@ -57,8 +57,16 @@ export default function Show({ brand }: { brand: Brand }) {
                         <div className="text-sm">{brand.name}</div>
                     </div>
                     <div className="flex flex-col gap-2">
+                        <div className="text-sm font-medium">Slug</div>
+                        <div className="text-sm">{brand.slug}</div>
+                    </div>
+                    <div className="flex flex-col gap-2">
                         <div className="text-sm font-medium">Image</div>
                         <img src={brand.image ? `/storage/${brand.image}` : '/images/default-image.png'} alt={brand.name} className="w-16 h-16 rounded-md" />
+                    </div>
+                    <div className="flex flex-col gap-2">
+                        <div className="text-sm font-medium">Active</div>
+                        <div className="text-sm">{brand.is_active ? 'Yes' : 'No'}</div>
                     </div>
                     <div className="flex flex-col gap-2">
                         <div className="text-sm font-medium">Created At</div>

@@ -71,7 +71,7 @@ export default function Index({ categories } : { categories: Category[] }) {
                     <SmallHeaderCell>Active</SmallHeaderCell>
                     <SmallHeaderCell>Image</SmallHeaderCell>
                     <AutoHeaderCell>Name</AutoHeaderCell>
-                    <WideHeaderCell>Slug</WideHeaderCell>
+                    <AutoHeaderCell>Slug</AutoHeaderCell>
                     <WideHeaderCell>Parent</WideHeaderCell>
                     <WideHeaderCell>Created At</WideHeaderCell>
                     <WideHeaderCell>Updated At</WideHeaderCell>
@@ -84,7 +84,7 @@ export default function Index({ categories } : { categories: Category[] }) {
                         <SmallCell><Checkbox  onClick={() => { router.put(route('panel.category.update', { category: category.id }), { is_active: !category.is_active})}} checked={!!category.is_active} className='cursor-pointer'/></SmallCell>
                         <ImageCell image={category.image} onClick={() => openImageDialog(category)} />
                         <AutoInfoCell label="Name" value={category.name} />
-                        <WideInfoCell label="Slug" value={category.slug} />
+                        <AutoInfoCell label="Slug" value={category.slug} />
                         <WideInfoCell label="Parent" value={category.parent?.name || 'None'} />
                         <WideInfoCell label="Created At" value={dayjs(new Date(category.created_at)).format('YYYY/MM/DD H:m')} /> 
                         <WideInfoCell label="Updated At" value={dayjs(new Date(category.updated_at)).format('YYYY/MM/DD H:m')} />
