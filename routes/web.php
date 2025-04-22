@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -20,6 +21,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::name('panel.')->group(function(){
             Route::resources([
                 'brand' => BrandController::class,
+                'category' => CategoryController::class,
             ]);
         });
     });

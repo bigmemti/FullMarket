@@ -26,6 +26,11 @@ const adminNavItems: NavItem[] = [
         href: '/panel/brand',
         icon: List,
     },
+    {
+        title: 'Category',
+        href: '/panel/category',
+        icon: List,
+    },
 ];
 
 const footerNavItems: NavItem[] = [];

@@ -50,3 +50,16 @@ export interface Brand{
     created_at: string;
     updated_at: string;
 }
+
+export interface Category{
+    id: number;
+    parent_id: number;
+    name: string;
+    slug: string;
+    image: string;
+    is_active: boolean;
+    parent: Category | null;
+    children: Category[] | null;
+    created_at: string;
+    updated_at: string;
+}

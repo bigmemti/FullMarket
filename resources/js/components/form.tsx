@@ -10,7 +10,7 @@ interface FormProps {
 
 function Form({ children, onSubmit }: FormProps) {
     return (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} className="space-y-4">
             {children}
         </form>
     )
@@ -34,9 +34,10 @@ interface TextInputProps {
     value: InputHTMLAttributes<HTMLInputElement>['value'];
     onChange: InputHTMLAttributes<HTMLInputElement>['onChange'];
     errors: string | undefined | null;
+    disabled?: boolean;
 }
 
-function TextInput({ label, name, value, onChange, errors }: TextInputProps) {
+function TextInput({ label, name, value, onChange, errors, disabled }: TextInputProps) {
     return (
         <div>
             <Label htmlFor={name} >{label}</Label>
@@ -44,6 +45,8 @@ function TextInput({ label, name, value, onChange, errors }: TextInputProps) {
                 id={name}
                 value={value}
                 onChange={onChange}
+                className="mt-1"
+                disabled={disabled}
             />
             {errors && (
                 <InputError message={errors} />
@@ -67,6 +70,7 @@ function FileInput({ label, name, onChange, errors }: FileInputProps) {
                 id={name}
                 type="file"
                 onChange={onChange}
+                className="mt-1"
             />
             {errors && (
                 <InputError message={errors} />
