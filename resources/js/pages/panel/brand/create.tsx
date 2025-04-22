@@ -1,8 +1,6 @@
 import DashboardHeader from "@/components/dashboard/header";
-import { TextInput, FileInput, Form, FormContainer, ProgressBar } from "@/components/form";
+import { TextInput, FileInput, Form, FormContainer, ProgressBar, CheckboxInput } from "@/components/form";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
 import AppLayout from "@/layouts/app-layout";
 import { BreadcrumbItem } from "@/types";
 import { Head, useForm } from "@inertiajs/react";
@@ -62,10 +60,8 @@ export default function Create(){
                     
                     <FileInput label="Image" name="image" onChange={e => setData('image', e.target.files?.[0] ?? null)} errors={errors.image} />
 
-                    <div className="flex items-center space-x-3">
-                        <Checkbox id="is_active" name="is_active" checked={data.is_active} onClick={() => setData('is_active', !data.is_active)} />
-                        <Label htmlFor="is_active">Is Active</Label>    
-                    </div>
+                    <CheckboxInput label="Is Active" name="is_active" checked={data.is_active} onChange={() => setData('is_active', !data.is_active)} />
+
                     {progress && <ProgressBar progress={progress.percentage ?? 0} />}
 
                     <Button disabled={processing} className="cursor-pointer mt-4 w-full">{processing ? 'Creating ...' : 'Create'}</Button>

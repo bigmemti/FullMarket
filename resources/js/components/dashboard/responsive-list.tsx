@@ -1,6 +1,7 @@
 import LinkButton from "@/components/link-button";
 import { Eye, Pencil, Trash } from "lucide-react";
 import { Button } from "../ui/button";
+import { Checkbox } from "../ui/checkbox";
 
 function ResponsiveList({ children }: { children: React.ReactNode }) {
     return (
@@ -160,6 +161,14 @@ function ImageCell({ image, onClick }: { image: string, onClick: () => void }) {
     )
 }
 
+function CheckboxCell({ checked, onClick }: { checked: boolean, onClick: () => void }) {
+    return (
+        <SmallCell>
+            <Checkbox  onClick={onClick} checked={checked} className='cursor-pointer'/>
+        </SmallCell>
+    )
+}
+
 export { 
     ResponsiveList, 
     ListHeader, 
@@ -178,5 +187,6 @@ export {
     ShowButton, 
     EditButton, 
     DeleteButton,
-    ImageCell
+    ImageCell,
+    CheckboxCell
 }

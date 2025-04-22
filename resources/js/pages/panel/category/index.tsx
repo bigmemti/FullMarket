@@ -4,9 +4,8 @@ import AppLayout from "@/layouts/app-layout";
 import { Category, BreadcrumbItem } from "@/types";
 import { Head, router } from "@inertiajs/react";
 import DashboardHeader from "@/components/dashboard/header";
-import { ActionHeaderCell, AutoHeaderCell, ListHeader, ResponsiveList, SmallHeaderCell, WideHeaderCell, ListItem, SmallInfoCell, AutoInfoCell, WideInfoCell, ActionCell, DeleteButton, EditButton, ShowButton, ImageCell, SmallCell } from "@/components/dashboard/responsive-list";
+import { ActionHeaderCell, AutoHeaderCell, ListHeader, ResponsiveList, SmallHeaderCell, WideHeaderCell, ListItem, SmallInfoCell, AutoInfoCell, WideInfoCell, ActionCell, DeleteButton, EditButton, ShowButton, ImageCell, CheckboxCell } from "@/components/dashboard/responsive-list";
 import { ConfirmDialog, ImageDialog } from '@/components/dashboard/dialog';
-import { Checkbox } from "@/components/ui/checkbox";
 
 const breadcrumb: BreadcrumbItem[] =[
     {
@@ -81,7 +80,7 @@ export default function Index({ categories } : { categories: Category[] }) {
                 {categories.map((category) => (
                     <ListItem key={category.id}> 
                         <SmallInfoCell label="ID" value={category.id.toString()} />
-                        <SmallCell><Checkbox  onClick={() => { router.put(route('panel.category.update', { category: category.id }), { is_active: !category.is_active})}} checked={!!category.is_active} className='cursor-pointer'/></SmallCell>
+                        <CheckboxCell checked={!!category.is_active} onClick={() => { router.put(route('panel.category.update', { category: category.id }), { is_active: !category.is_active})}} />
                         <ImageCell image={category.image} onClick={() => openImageDialog(category)} />
                         <AutoInfoCell label="Name" value={category.name} />
                         <AutoInfoCell label="Slug" value={category.slug} />
@@ -103,6 +102,7 @@ export default function Index({ categories } : { categories: Category[] }) {
                 onDelete={() => deleteCategory()} 
                 processing={deleteDialog.processing || false} 
             />
+            
             <ImageDialog 
                 isOpen={imageDialog.open || false} 
                 onOpenChange={(open) => setImageDialog({ open })} 

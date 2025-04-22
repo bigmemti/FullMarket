@@ -5,9 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Head, useForm } from "@inertiajs/react";
 import InputError from "@/components/input-error";
 import { BreadcrumbItem, Category } from "@/types";
-import { Checkbox } from "@/components/ui/checkbox";
 import DashboardHeader from "@/components/dashboard/header";
-import { TextInput, FileInput, Form, FormContainer, ProgressBar } from "@/components/form";
+import { TextInput, FileInput, Form, FormContainer, ProgressBar, CheckboxInput, SelectInput } from "@/components/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -66,28 +65,21 @@ export default function Create({categories}: {categories: Category[]}){
                     
                     <TextInput label="Slug" name="slug" value={data.slug} disabled={!errors.slug} onChange={e => setData('slug', e.target.value)} errors={errors.slug} />
 
-                    <Label htmlFor="parent_id">Parent</Label>
-                    <Select disabled={!categories.length} defaultValue={data.parent_id?.toString() ?? undefined} onValueChange={e => setData('parent_id', parseInt(e))}>
-                        <SelectTrigger className="mt-1">
-                            <SelectValue placeholder="Parent" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value=" ">None</SelectItem>
-                            {categories.map(category => (
-                                <SelectItem key={category.id} value={category.id.toString()}>{category.name}</SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
-                    {errors.parent_id && <InputError message={errors.parent_id} />}
+                    <SelectInput 
+                        label="Parent" 
+                        name="parent_id" 
+                        options={categories.map(category => ({ label: category.name, value: category.id.toString() }))} 
+                        onChange={e => setData('parent_id', parseInt(e))} 
+                        errors={errors.parent_id} 
+                        value={data.parent_id?.toString() ?? ''} 
+                        disabled={!categories.length}
+                    />
 
                     <FileInput label="Image" name="image" onChange={e => setData('image', e.target.files?.[0] ?? null)} errors={errors.image} />
 
-                    {progress && <ProgressBar progress={progress.percentage ?? 0} />}
+                    <CheckboxInput label="Is Active" name="is_active" checked={data.is_active} onChange={() => setData('is_active', !data.is_active)} />
 
-                    <div className="flex items-center space-x-3">
-                        <Checkbox id="is_active" name="is_active" checked={data.is_active} onClick={() => setData('is_active', !data.is_active)} />
-                        <Label htmlFor="is_active">Is Active</Label>
-                    </div>
+                    {progress && <ProgressBar progress={progress.percentage ?? 0} />}
 
                     <Button disabled={processing} className="cursor-pointer mt-4 w-full">{processing ? 'Creating ...' : 'Create'}</Button>
                 </Form>
