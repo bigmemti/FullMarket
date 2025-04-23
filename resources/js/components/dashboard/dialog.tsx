@@ -5,9 +5,10 @@ interface ImageDialogProps {
     isOpen: boolean;
     onOpenChange: (open: boolean) => void;
     data: { name: string, image: string } | null;
+    model: string;
 }
 
-function ImageDialog({ isOpen, onOpenChange, data }: ImageDialogProps) {
+function ImageDialog({ isOpen, onOpenChange, data, model }: ImageDialogProps) {
     if (!data) return null;
     return (
         <Dialog open={isOpen} onOpenChange={(open) => onOpenChange(open)}>
@@ -15,7 +16,7 @@ function ImageDialog({ isOpen, onOpenChange, data }: ImageDialogProps) {
                 <DialogHeader>
                     <DialogTitle>{data.name}</DialogTitle>
                     <DialogDescription>
-                        Brand image preview
+                        {model} image preview
                     </DialogDescription>
                 </DialogHeader>
                 <div className="flex items-center justify-center p-6">
@@ -42,16 +43,17 @@ interface ConfirmDialogProps {
     onOpenChange: (open: boolean) => void;
     onDelete: () => void;
     processing: boolean;
+    model: string;
 }
 
-function ConfirmDialog({ isOpen, onOpenChange, onDelete, processing }: ConfirmDialogProps) {
+function ConfirmDialog({ isOpen, onOpenChange, onDelete, processing, model }: ConfirmDialogProps) {
     return (
         <Dialog open={isOpen} onOpenChange={(open) => onOpenChange(open)}>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>Confirm Deletion</DialogTitle>
                     <DialogDescription>
-                        Are you sure you want to delete this brand? This action cannot be undone.
+                        Are you sure you want to delete this {model}? This action cannot be undone.
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter>

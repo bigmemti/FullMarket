@@ -88,6 +88,7 @@ export default function Show({ brand }: { brand: Brand }) {
                 onOpenChange={(open) => setDeleteDialog({ open })} 
                 onDelete={() => deleteBrand()} 
                 processing={deleteDialog.processing || false} 
+                model="brand"
             />
         </AppLayout>
     );

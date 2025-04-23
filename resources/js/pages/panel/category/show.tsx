@@ -92,6 +92,7 @@ export default function Show({ category }: { category: Category }) {
                 onOpenChange={(open) => setDeleteDialog({ open })} 
                 onDelete={() => deleteCategory()} 
                 processing={deleteDialog.processing || false} 
+                model="category"
             />
         </AppLayout>
     );

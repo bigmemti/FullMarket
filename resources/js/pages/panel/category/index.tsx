@@ -101,12 +101,14 @@ export default function Index({ categories } : { categories: Category[] }) {
                 onOpenChange={(open) => setDeleteDialog({ open })} 
                 onDelete={() => deleteCategory()} 
                 processing={deleteDialog.processing || false} 
+                model="category"
             />
             
             <ImageDialog 
                 isOpen={imageDialog.open || false} 
                 onOpenChange={(open) => setImageDialog({ open })} 
                 data={imageDialog.category || null} 
+                model="category"
             />
         </AppLayout>
     );

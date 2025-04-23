@@ -133,6 +133,7 @@ export default function Show({ product }: { product: Product }) {
                 onOpenChange={(open) => setDeleteDialog({ open })} 
                 onDelete={() => deleteProduct()} 
                 processing={deleteDialog.processing || false} 
+                model="product"
             />
         </AppLayout>
     );

@@ -99,12 +99,14 @@ export default function Index({ brands } : { brands: Brand[] }) {
                 onOpenChange={(open) => setDeleteDialog({ open })} 
                 onDelete={() => deleteBrand()} 
                 processing={deleteDialog.processing || false} 
+                model="brand"
             />
             
             <ImageDialog 
                 isOpen={imageDialog.open || false} 
                 onOpenChange={(open) => setImageDialog({ open })} 
                 data={imageDialog.brand || null} 
+                model="brand"
             />
         </AppLayout>
     );

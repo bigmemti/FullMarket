@@ -114,12 +114,14 @@ export default function Index({ products }: { products: Product[] }) {
                 onOpenChange={(open) => setDeleteDialog({ ...deleteDialog, open })}
                 onDelete={deleteProduct}
                 processing={deleteDialog.processing ?? false}
+                model="product"
             />
 
             <ImageDialog
                 isOpen={imageDialog.open ?? false}
                 onOpenChange={(open) => setImageDialog({ ...imageDialog, open })}
                 data={imageDialog.product ?? null}
+                model="product"
             />
         </AppLayout>
     );
