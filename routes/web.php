@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -22,6 +23,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::resources([
                 'brand' => BrandController::class,
                 'category' => CategoryController::class,
+                'product' => ProductController::class,
             ]);
         });
     });

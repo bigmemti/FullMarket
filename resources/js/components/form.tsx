@@ -19,11 +19,12 @@ function Form({ children, onSubmit }: FormProps) {
 
 interface FormContainerProps {
     children: React.ReactNode;
+    className?: string;
 }
 
-function FormContainer({ children }: FormContainerProps) {
+function FormContainer({ children, className }: FormContainerProps) {
     return (
-        <div className="w-lg mx-auto mt-12">
+        <div className={`w-lg mx-auto mt-12 ${className}`}>
             {children}
         </div>
     )
@@ -36,9 +37,10 @@ interface TextInputProps {
     onChange: InputHTMLAttributes<HTMLInputElement>['onChange'];
     errors: string | undefined | null;
     disabled?: boolean;
+    autoFocus?: boolean;
 }
 
-function TextInput({ label, name, value, onChange, errors, disabled }: TextInputProps) {
+function TextInput({ label, name, value, onChange, errors, disabled, autoFocus }: TextInputProps) {
     return (
         <div>
             <Label htmlFor={name} >{label}</Label>
@@ -48,6 +50,7 @@ function TextInput({ label, name, value, onChange, errors, disabled }: TextInput
                 onChange={onChange}
                 className="mt-1"
                 disabled={disabled}
+                autoFocus={autoFocus}
             />
             {errors && (
                 <InputError message={errors} />
