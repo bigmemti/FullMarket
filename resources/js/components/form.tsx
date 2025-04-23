@@ -4,6 +4,7 @@ import { Label } from "./ui/label"
 import InputError from "./input-error"
 import { Checkbox } from "./ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import { Textarea } from "./ui/textarea";
 interface FormProps {
     children: React.ReactNode;
     onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -137,6 +138,49 @@ function SelectInput({ label, name, onChange, options, errors, value, disabled }
     )
 }
 
+interface TextareaInputProps {
+    label: string;
+    name: string;
+    value: string;
+    onChange: ChangeEventHandler<HTMLTextAreaElement>;
+    errors: string | undefined | null;
+}
 
+function TextareaInput({ label, name, value, onChange, errors }: TextareaInputProps) {
+    return (
+        <div className="flex flex-col gap-2">
+            <Label>{label}</Label>
+            <Textarea
+                name={name}
+                value={value}
+                onChange={onChange}
+            />
+            {errors && <InputError message={errors} />}
+        </div>
+    )
+}
 
-export { TextInput, FileInput, Form, FormContainer, ProgressBar, CheckboxInput, SelectInput }
+interface NumberInputProps {
+    label: string;
+    name: string;
+    value: number | null;
+    onChange: ChangeEventHandler<HTMLInputElement>;
+    errors: string | undefined | null;
+}
+
+function NumberInput({ label, name, value, onChange, errors }: NumberInputProps) {
+    return (
+        <div className="flex flex-col gap-2">
+            <Label>{label}</Label>
+            <Input
+                name={name}
+                type="number"
+                value={value ?? ''}
+                onChange={onChange}
+            />
+            {errors && <InputError message={errors} />}
+        </div>
+    )
+}
+
+export { TextInput, FileInput, Form, FormContainer, ProgressBar, CheckboxInput, SelectInput, TextareaInput, NumberInput }

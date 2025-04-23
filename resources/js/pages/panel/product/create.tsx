@@ -1,12 +1,8 @@
 import DashboardHeader from "@/components/dashboard/header";
-import { FileInput, Form, FormContainer, TextInput, CheckboxInput, ProgressBar, SelectInput } from "@/components/form";
-import InputError from "@/components/input-error";
+import { FileInput, Form, FormContainer, TextInput, CheckboxInput, ProgressBar, SelectInput, TextareaInput, NumberInput } from "@/components/form";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import AppLayout from "@/layouts/app-layout";
 import { Category, Brand, BreadcrumbItem } from "@/types";
-import { Textarea } from "@/components/ui/textarea";
 import { Head } from "@inertiajs/react";
 import { useForm } from "@inertiajs/react";
 
@@ -33,9 +29,9 @@ interface ProductForm {
     brand_id: number | null;
     image: File | null;
     description: string;
-    price: string;
-    discount_price: string;
-    stock: string;
+    price: number | null;
+    discount_price: number | null;
+    stock: number | null;
     is_active: boolean;
 }
 
@@ -48,9 +44,9 @@ export default function Create({ categories, brands }: { categories: Category[],
         brand_id: null,
         image: null,
         description: '',
-        price: '',
-        discount_price: '',
-        stock: '',
+        price: null,
+        discount_price: null,
+        stock: null,
         is_active: true,
     });
 
@@ -110,48 +106,14 @@ export default function Create({ categories, brands }: { categories: Category[],
                     
                     <FileInput label="Image" name="image" onChange={e => setData('image', e.target.files?.[0] ?? null)} errors={errors.image} />
 
-                    <div className="flex flex-col gap-2">
-                        <Label>Description</Label>
-                        <Textarea
-                            name="description"
-                            value={data.description}
-                            onChange={(e) => setData('description', e.target.value)}
-                        />
-                        <InputError message={errors.description} />
-                    </div>
+                    <TextareaInput label="Description" name="description" value={data.description} onChange={e => setData('description', e.target.value)} errors={errors.description} />
 
-                    <div className="flex flex-col gap-2">
-                        <Label>Price</Label>
-                        <Input
-                            name="price"
-                            type="number"
-                            value={data.price}
-                            onChange={(e) => setData('price', e.target.value)}
-                        />
-                        <InputError message={errors.price} />
-                    </div>
-                    
-                    <div className="flex flex-col gap-2">
-                        <Label>Discount Price</Label>
-                        <Input
-                            name="discount_price"
-                            type="number"
-                            value={data.discount_price}
-                            onChange={(e) => setData('discount_price', e.target.value)}
-                        />
-                        <InputError message={errors.discount_price} />
-                    </div>
-                    
-                    <div className="flex flex-col gap-2">
-                        <Label>Stock</Label>
-                        <Input
-                            name="stock"
-                            type="number"
-                            value={data.stock}
-                            onChange={(e) => setData('stock', e.target.value)}
-                        />
-                        <InputError message={errors.stock} />
-                    </div>
+
+                    <NumberInput label="Price" name="price" value={data.price} onChange={e => setData('price', parseInt(e.target.value))} errors={errors.price} />
+
+                    <NumberInput label="Discount Price" name="discount_price" value={data.discount_price} onChange={e => setData('discount_price', parseInt(e.target.value))} errors={errors.discount_price} />
+
+                    <NumberInput label="Stock" name="stock" value={data.stock} onChange={e => setData('stock', parseInt(e.target.value))} errors={errors.stock} />
 
                     <CheckboxInput label="Is Active" name="is_active" checked={data.is_active} onChange={() => setData('is_active', !data.is_active)} />
 
