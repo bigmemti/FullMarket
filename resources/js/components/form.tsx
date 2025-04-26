@@ -109,21 +109,22 @@ function CheckboxInput({ label, name, checked, onChange }: CheckboxInputProps) {
 }
 
 interface SelectInputProps {
-    label: string;
-    name: string;
+    label?: string | undefined;
+    name?: string | undefined;
     onChange: (value: string) => void;
     options: { label: string; value: string }[];
     errors: string | undefined | null;
     value: string;
     disabled?: boolean;
+    className?: string;
 }
 
-function SelectInput({ label, name, onChange, options, errors, value, disabled }: SelectInputProps) {
+function SelectInput({ label, name, onChange, options, errors, value, disabled, className }: SelectInputProps) {
     return (
         <div>
             <Label htmlFor={name}>{label}</Label>
             <Select disabled={disabled} defaultValue={value} onValueChange={onChange}>
-                <SelectTrigger className="mt-1">
+                <SelectTrigger className={`mt-1 ${className}`}>
                     <SelectValue placeholder={label} />
                 </SelectTrigger>
                 <SelectContent>

@@ -22,8 +22,7 @@ export interface NavItem {
     isActive?: boolean;
 }
 
-export interface SharedData {
-    name: string;
+export interface SharedData {    name: string;
     quote: { message: string; author: string };
     auth: Auth;
     ziggy: Config & { location: string };
@@ -81,6 +80,25 @@ export interface Product{
     discount_price: number;
     stock: number;
     is_active: boolean;
+    pivot?: {
+        price: number;
+        quantity: number;
+        description: string;
+        created_at: string;
+        updated_at: string;
+    };
+    created_at: string;
+    updated_at: string;
+}
+
+export interface Order{
+    id: number;
+    user_id: number;
+    user?: User;
+    total: number;
+    status: number;
+    description: string;
+    products?: Product[];
     created_at: string;
     updated_at: string;
 }
