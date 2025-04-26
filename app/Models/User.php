@@ -7,7 +7,8 @@ use App\Enums\UserRole;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -47,5 +48,15 @@ class User extends Authenticatable
             'password' => 'hashed',
             'role' => UserRole::class,
         ];
+    }
+
+    public function isAdmin(): Attribute
+    {
+        return Attribute::get(fn () => $this->role === UserRole::Admin);
+    }
+
+    public function isUser(): Attribute
+    {
+        return Attribute::get(fn () => $this->role === UserRole::User);
     }
 }

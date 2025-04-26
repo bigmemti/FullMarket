@@ -2,7 +2,6 @@
 
 namespace App\Policies;
 
-use App\Enums\UserRole;
 use App\Models\Product;
 use App\Models\User;
 
@@ -13,7 +12,7 @@ class ProductPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->role === UserRole::Admin;
+        return $user->is_admin;
     }
 
     /**
@@ -21,7 +20,7 @@ class ProductPolicy
      */
     public function view(User $user, Product $product): bool
     {
-        return $user->role === UserRole::Admin;
+        return $user->is_admin;
     }
 
     /**
@@ -29,7 +28,7 @@ class ProductPolicy
      */
     public function create(User $user): bool
     {
-        return $user->role === UserRole::Admin;
+        return $user->is_admin;
     }
 
     /**
@@ -37,7 +36,7 @@ class ProductPolicy
      */
     public function update(User $user, Product $product): bool
     {
-        return $user->role === UserRole::Admin;
+        return $user->is_admin;
     }
 
     /**
@@ -45,7 +44,7 @@ class ProductPolicy
      */
     public function delete(User $user, Product $product): bool
     {
-        return $user->role === UserRole::Admin;
+        return $user->is_admin;
     }
 
     /**
@@ -53,7 +52,7 @@ class ProductPolicy
      */
     public function restore(User $user, Product $product): bool
     {
-        return $user->role === UserRole::Admin;
+        return $user->is_admin;
     }
 
     /**
@@ -61,6 +60,6 @@ class ProductPolicy
      */
     public function forceDelete(User $user, Product $product): bool
     {
-        return $user->role === UserRole::Admin;
+        return $user->is_admin;
     }
 }
