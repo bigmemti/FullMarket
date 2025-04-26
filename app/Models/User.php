@@ -59,4 +59,9 @@ class User extends Authenticatable
     {
         return Attribute::get(fn () => $this->role === UserRole::User);
     }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
 }
