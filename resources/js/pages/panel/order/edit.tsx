@@ -76,7 +76,7 @@ export default function Edit({ products, order }: { products: Product[], order: 
         }, 0);
       
         setData('total', total ?? null);
-      }, [data, setData]);
+      }, [data.products, setData]);
 
       const removeProductAtIndex = (index: number) => {
         const updated = [...data.products ?? []];

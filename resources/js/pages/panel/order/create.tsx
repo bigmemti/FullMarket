@@ -67,8 +67,8 @@ export default function Create({ products, users }: { products: Product[], users
           return acc + (price * quantity);
         }, 0);
       
-        setData('total', total);
-      }, [data, setData]);
+        setData('total', total ?? null);
+      }, [data.products, setData]);
 
       const removeProductAtIndex = (index: number) => {
         const updated = [...data.products];

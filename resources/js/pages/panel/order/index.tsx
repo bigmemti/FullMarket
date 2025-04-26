@@ -79,10 +79,7 @@ export default function Index({ orders }: { orders: Order[] }) {
                             <SelectInput 
                                 className="w-full p-2 border rounded"
                                 value={order.status.toString()}
-                                onChange={(e) => {
-                                    const newStatus = parseInt(e);
-                                    router.put(route('panel.order.update', { order: order.id }), {status: newStatus}, {preserveScroll: true});
-                                }}
+                                onChange={(e) => router.put(route('panel.order.update', { order: order.id }), {status: parseInt(e)}, {preserveScroll: true})}
                                 options={orderStatuses.map((status) => ({ label: status.label, value: status.value.toString() }))}
                                 errors={undefined}
                             />
