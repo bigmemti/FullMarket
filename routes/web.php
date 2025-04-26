@@ -4,6 +4,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -26,6 +27,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 'category' => CategoryController::class,
                 'product' => ProductController::class,
                 'order' => OrderController::class,
+                'user' => UserController::class,
             ]);
         });
     });

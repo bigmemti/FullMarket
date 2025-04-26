@@ -41,6 +41,11 @@ const adminNavItems: NavItem[] = [
         href: '/panel/order',
         icon: List,
     },
+    {
+        title: 'User',
+        href: '/panel/user',
+        icon: List,
+    },
 ];
 
 const footerNavItems: NavItem[] = [];

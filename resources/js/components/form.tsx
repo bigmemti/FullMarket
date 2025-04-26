@@ -59,6 +59,35 @@ function TextInput({ label, name, value, onChange, errors, disabled, autoFocus }
         </div>
     )
 }
+interface EmailInputProps {
+    label: string;
+    name: string;
+    value: InputHTMLAttributes<HTMLInputElement>['value'];
+    onChange: InputHTMLAttributes<HTMLInputElement>['onChange'];
+    errors: string | undefined | null;
+    disabled?: boolean;
+    autoFocus?: boolean;
+}
+
+function EmailInput({ label, name, value, onChange, errors, disabled, autoFocus }: EmailInputProps) {
+    return (
+        <div>
+            <Label htmlFor={name} >{label}</Label>
+            <Input
+                id={name}
+                value={value}
+                type="email"
+                onChange={onChange}
+                className="mt-1"
+                disabled={disabled}
+                autoFocus={autoFocus}
+            />
+            {errors && (
+                <InputError message={errors} />
+            )}
+        </div>
+    )
+}
 
 interface FileInputProps {
     label: string;
@@ -184,4 +213,4 @@ function NumberInput({ label, name, value, onChange, errors }: NumberInputProps)
     )
 }
 
-export { TextInput, FileInput, Form, FormContainer, ProgressBar, CheckboxInput, SelectInput, TextareaInput, NumberInput }
+export { TextInput, EmailInput, FileInput, Form, FormContainer, ProgressBar, CheckboxInput, SelectInput, TextareaInput, NumberInput }
