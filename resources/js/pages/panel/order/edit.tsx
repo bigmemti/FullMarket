@@ -3,7 +3,7 @@ import DashboardHeader from "@/components/dashboard/header";
 import { Head, useForm } from "@inertiajs/react";
 import { Form, FormContainer, NumberInput, SelectInput, TextareaInput } from "@/components/form";
 import { FormEventHandler, useEffect } from "react";
-import { BreadcrumbItem, Product, User, Order } from "@/types";
+import { BreadcrumbItem, Product, Order } from "@/types";
 import { Button } from "@/components/ui/button";
 import { v4 as uuid } from 'uuid';  
 
@@ -75,11 +75,8 @@ export default function Edit({ products, order }: { products: Product[], order: 
           return acc + (price * quantity);
         }, 0);
       
-        setData({
-          ...data,
-          total: total ?? null,
-        });
-      }, [data.products]);
+        setData('total', total ?? null);
+      }, [data, setData]);
 
       const removeProductAtIndex = (index: number) => {
         const updated = [...data.products ?? []];

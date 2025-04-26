@@ -1,7 +1,7 @@
 import AppLayout from "@/layouts/app-layout";
 import DashboardHeader from "@/components/dashboard/header";
 import { Head, useForm } from "@inertiajs/react";
-import { Form, FormContainer, NumberInput, TextInput, SelectInput, TextareaInput } from "@/components/form";
+import { Form, FormContainer, NumberInput, SelectInput, TextareaInput } from "@/components/form";
 import { FormEventHandler, useEffect } from "react";
 import { BreadcrumbItem, Product, User } from "@/types";
 import { Button } from "@/components/ui/button";
@@ -67,11 +67,8 @@ export default function Create({ products, users }: { products: Product[], users
           return acc + (price * quantity);
         }, 0);
       
-        setData({
-          ...data,
-          total: total,
-        });
-      }, [data.products]);
+        setData('total', total);
+      }, [data, setData]);
 
       const removeProductAtIndex = (index: number) => {
         const updated = [...data.products];
