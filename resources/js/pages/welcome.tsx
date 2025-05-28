@@ -1,107 +1,257 @@
+import { Button } from '@/components/ui/button';
 import { type SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
+import { Menu, ShoppingCart, LogIn, Instagram, Home } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import { Separator } from '@/components/ui/separator';
 
 export default function Welcome() {
     const { auth } = usePage<SharedData>().props;
 
     return (
         <>
-            <Head title="Welcome">
+            <Head title="FullMarket">
                 <link rel="preconnect" href="https://fonts.bunny.net" />
                 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
             </Head>
-            <div className="flex min-h-screen flex-col items-center bg-[#FDFDFC] p-6 text-[#1b1b18] lg:justify-center lg:p-8 dark:bg-[#0a0a0a]">
-                <header className="mb-6 w-full max-w-[335px] text-sm not-has-[nav]:hidden lg:max-w-4xl">
-                    <nav className="flex items-center justify-end gap-4">
-                        {auth.user ? (
-                            <Link
-                                href={route('dashboard')}
-                                className="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
-                            >
-                                Dashboard
-                            </Link>
-                        ) : (
-                            <>
-                                <Link
-                                    href={route('login')}
-                                    className="inline-block rounded-sm border border-transparent px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#19140035] dark:text-[#EDEDEC] dark:hover:border-[#3E3E3A]"
-                                >
-                                    Log in
-                                </Link>
-                                <Link
-                                    href={route('register')}
-                                    className="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
-                                >
-                                    Register
-                                </Link>
-                            </>
-                        )}
-                    </nav>
-                </header>
-                <div className="flex w-full items-center justify-center opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0">
-                    <main className="flex w-full max-w-[335px] flex-col-reverse lg:max-w-4xl lg:flex-row">
-                        <div className="flex-1 rounded-br-lg rounded-bl-lg bg-white p-6 pb-12 text-[13px] leading-[20px] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-tl-lg lg:rounded-br-none lg:p-20 dark:bg-[#161615] dark:text-[#EDEDEC] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
-                            <h1 className="mb-4 text-3xl font-bold">Welcome to Our Shop</h1>
-                            <p className="mb-6 text-lg text-[#706f6c] dark:text-[#A1A09A]">
-                                Discover amazing products at great prices.
-                                <br />
-                                Start shopping with these popular categories:
-                            </p>
-                            <ul className="mb-8 grid grid-cols-1 gap-4 lg:grid-cols-2">
-                                <li className="group rounded-lg border border-gray-200 p-4 transition-all hover:border-[#f53003] dark:border-gray-800">
-                                    <a href="/category/electronics" className="flex items-center space-x-3">
-                                        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#fff2f2] dark:bg-[#1D0002]">
-                                            <svg className="h-6 w-6 text-[#f53003]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                            </svg>
-                                        </span>
-                                        <span className="font-medium group-hover:text-[#f53003]">Electronics</span>
-                                    </a>
+            <div>
+                <nav className='border-b border-accent px-4 lg:py-4'>
+                    <div className='lg:container lg:mx-auto'>
+                        <div className='flex items-center justify-between py-3 border-b border-accent lg:border-none'>
+                            <Button variant='ghost' size='icon' className='cursor-pointer lg:hidden'>
+                                <Menu  />
+                            </Button>
+                            <div className='flex items-center gap-2'>
+                                <Link href={route('home')} className='text-lg font-medium'>FullMarket</Link>
+                                <Input type='text' placeholder='Search' className='hidden lg:block w-auto'/>
+                            </div>
+                            <div className='flex items-center gap-2'>
+                                <Button variant='ghost' size='icon' className='cursor-pointer relative'>
+                                    <ShoppingCart />
+                                    <Badge variant="destructive" className='absolute -bottom-2 -right-2'>0</Badge>
+                                </Button>
+                                <span className='hidden lg:block text-muted-foreground'>|</span>
+                                <Button variant='ghost' size='icon' className='cursor-pointer hidden lg:flex'>
+                                    <LogIn />
+                                </Button>
+                            </div>
+                        </div>
+                        <div className='hidden lg:block'>
+                            <ul className='flex items-center gap-2 text-sm text-muted-foreground'>
+                                <li>
+                                    <Link href={route('home')}>
+                                        <p>صفحه اصلی</p>
+                                    </Link>
                                 </li>
-                                <li className="group rounded-lg border border-gray-200 p-4 transition-all hover:border-[#f53003] dark:border-gray-800">
-                                    <a href="/category/fashion" className="flex items-center space-x-3">
-                                        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#fff2f2] dark:bg-[#1D0002]">
-                                            <svg className="h-6 w-6 text-[#f53003]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                            </svg>
-                                        </span>
-                                        <span className="font-medium group-hover:text-[#f53003]">Fashion</span>
-                                    </a>
+                                <li>
+                                    <Link href={route('home')}>
+                                        <p>صفحه اصلی</p>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href={route('home')}>
+                                        <p>صفحه اصلی</p>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href={route('home')}>
+                                        <p>صفحه اصلی</p>
+                                    </Link>
                                 </li>
                             </ul>
-                            <div className="flex flex-wrap gap-4">
-                                <a
-                                    href="/shop"
-                                    className="inline-flex items-center rounded-lg bg-[#f53003] px-6 py-3 text-base font-medium text-white transition-colors hover:bg-[#d62a02] dark:bg-[#FF4433] dark:hover:bg-[#E63E2E]"
-                                >
-                                    Start Shopping
-                                    <svg className="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                    </svg>
-                                </a>
-                                <a
-                                    href="/deals"
-                                    className="inline-flex items-center rounded-lg border border-[#f53003] px-6 py-3 text-base font-medium text-[#f53003] transition-colors hover:bg-[#fff2f2] dark:border-[#FF4433] dark:text-[#FF4433] dark:hover:bg-[#1D0002]"
-                                >
-                                    View Deals
+                        </div>
+                        <div className='py-3 flex items-center gap-2 lg:hidden'>
+                            <Input type='text' placeholder='Search' />
+                            <Button variant='outline' size='icon' className='cursor-pointer'>
+                                <LogIn />
+                            </Button>
+                        </div>
+                    </div>
+                </nav>
+                <header className='p-4 grid gap-4 md:grid-cols-4 md:grid-rows-2 md:items-stretch container mx-auto'>
+                    <img src='https://zagros.market/uploads/slidezagros-1.jpg' className='w-full object-cover rounded-lg col-span-3 row-span-2'/>
+                    <img src='https://zagros.market/uploads/banerchaei.jpg' className='w-full object-cover rounded-lg col-span-1'/>
+                    <img src='https://zagros.market/uploads/banermaye.jpg' className='w-full object-cover rounded-lg col-span-1'/>
+                </header>
+                <main className='container mx-auto'>
+                    <section className='p-4'>
+                        <Carousel className='cursor-grab bg-purple-400'>
+                            <CarouselContent>
+                                <CarouselItem className="basis-48 h-40 border">1</CarouselItem>
+                                <CarouselItem className="basis-48 h-40 border">2</CarouselItem>
+                                <CarouselItem className="basis-48 h-40 border">3</CarouselItem>
+                                <CarouselItem className="basis-48 h-40 border">4</CarouselItem>
+                                <CarouselItem className="basis-48 h-40 border">5</CarouselItem>
+                                <CarouselItem className="basis-48 h-40 border">6</CarouselItem>
+                            </CarouselContent>
+                        </Carousel>
+                    </section>
+                    <section className='p-4'>
+                        <h2 className='text-2xl font-medium text-center mb-4'>Categories</h2>
+                        <div className='grid grid-cols-2 md:grid-cols-4 gap-4 lg:grid-cols-6'>
+                            <div className='border p-4 rounded-lg'>
+                                <h3 className='text-lg font-medium'>Category 1</h3>
+                            </div>
+                            <div className='border p-4 rounded-lg'>
+                                <h3 className='text-lg font-medium'>Category 2</h3>
+                            </div>
+                            <div className='border p-4 rounded-lg'>
+                                <h3 className='text-lg font-medium'>Category 3</h3>
+                            </div>
+                            <div className='border p-4 rounded-lg'>
+                                <h3 className='text-lg font-medium'>Category 4</h3>
+                            </div>
+                            <div className='border p-4 rounded-lg'>
+                                <h3 className='text-lg font-medium'>Category 5</h3>
+                            </div>
+                            <div className='border p-4 rounded-lg'>
+                                <h3 className='text-lg font-medium'>Category 6</h3>
+                            </div>
+                            <div className='border p-4 rounded-lg'>
+                                <h3 className='text-lg font-medium'>Category 7</h3>
+                            </div>
+                            <div className='border p-4 rounded-lg'>
+                                <h3 className='text-lg font-medium'>Category 8</h3>
+                            </div>
+                        </div>
+                    </section>
+                    <section className='p-4'>
+                        <Carousel className='cursor-grab bg-amber-600'>
+                            <CarouselContent>
+                                <CarouselItem className="basis-48 h-40 border">1</CarouselItem>
+                                <CarouselItem className="basis-48 h-40 border">2</CarouselItem>
+                                <CarouselItem className="basis-48 h-40 border">3</CarouselItem>
+                                <CarouselItem className="basis-48 h-40 border">4</CarouselItem>
+                                <CarouselItem className="basis-48 h-40 border">5</CarouselItem>
+                                <CarouselItem className="basis-48 h-40 border">6</CarouselItem>
+                            </CarouselContent>
+                        </Carousel>
+                    </section>
+                    <section className='p-4 grid gap-4 md:grid-cols-2'>
+                        <img className='w-full object-cover rounded-lg' src="https://zagros.market/uploads/بنر-محصولات-صبحانه.jpg" alt="" />
+                        <img className='w-full object-cover rounded-lg' src="https://zagros.market/uploads/بنر-محصولات-پروتئین.jpg" alt="" />
+                        <img className='w-full object-cover rounded-lg' src="https://zagros.market/uploads/%D8%AE%D9%86%DA%A9-%D8%A8%D9%86%D9%88%D8%B4.jpg" alt="" />
+                        <img className='w-full object-cover rounded-lg' src="https://zagros.market/uploads/%D9%88%D8%B3%D8%A7%DB%8C%D9%84-%D9%86%D8%B8%D8%A7%D9%81%D8%AA-%D9%85%D9%86%D8%B2%D9%84.jpg" alt="" />
+                    </section>
+                    <section className='p-4'>
+                        <Carousel className='cursor-grab bg-gray-200'>
+                            <CarouselContent>
+                                <CarouselItem className="basis-48 h-40 border">1</CarouselItem>
+                                <CarouselItem className="basis-48 h-40 border">2</CarouselItem>
+                                <CarouselItem className="basis-48 h-40 border">3</CarouselItem>
+                                <CarouselItem className="basis-48 h-40 border">4</CarouselItem>
+                                <CarouselItem className="basis-48 h-40 border">5</CarouselItem>
+                                <CarouselItem className="basis-48 h-40 border">6</CarouselItem>
+                            </CarouselContent>
+                        </Carousel>
+                    </section>
+                    <section className='p-4'>
+                        <img src="https://zagros.market/uploads/%D8%AE%D8%B4%DA%A9%D8%A8%D8%A7%D8%B1.jpg" alt="" className='w-full object-cover rounded-lg' />
+                    </section>
+                    <section className='p-4'>
+                        <Carousel className='cursor-grab bg-gray-200'>
+                            <CarouselContent>
+                                <CarouselItem className="basis-48 h-40 border">1</CarouselItem>
+                                <CarouselItem className="basis-48 h-40 border">2</CarouselItem>
+                                <CarouselItem className="basis-48 h-40 border">3</CarouselItem>
+                                <CarouselItem className="basis-48 h-40 border">4</CarouselItem>
+                                <CarouselItem className="basis-48 h-40 border">5</CarouselItem>
+                                <CarouselItem className="basis-48 h-40 border">6</CarouselItem>
+                            </CarouselContent>
+                        </Carousel>
+                    </section>
+                    <section className='p-4'>
+                        <Carousel className='cursor-grab'>
+                            <CarouselContent>
+                                <CarouselItem className="basis-48 h-40 border-e">1</CarouselItem>
+                                <CarouselItem className="basis-48 h-40 border-e">2</CarouselItem>
+                                <CarouselItem className="basis-48 h-40 border-e">3</CarouselItem>
+                                <CarouselItem className="basis-48 h-40 border-e">4</CarouselItem>
+                                <CarouselItem className="basis-48 h-40 border-e">5</CarouselItem>
+                                <CarouselItem className="basis-48 h-40 border-e">6</CarouselItem>
+                            </CarouselContent>
+                        </Carousel>
+                    </section>
+                </main>
+                <footer className='mt-8 grid gap-4'>
+                    <section className='grid gap-4 border-b border-accent pb-2 px-4'>                        
+                        <div className='flex flex-col gap-4 items-center justify-between bg-blue-950 p-4 rounded-lg lg:hidden'>
+                            <div className='font-medium'>
+                                نصب وب اپلیکشن      
+                            </div>
+                            <div className='flex items-center gap-2'>
+                                <button className='bg-white text-black px-4 py-2 rounded-md'>وب اپلیکشن ios</button>
+                                <button className='bg-white text-black px-4 py-2 rounded-md'>وب اپلیکشن اندروید</button>
+                            </div>
+                        </div>
+                    </section>
+                    <section className='px-4 border-b border-accent pb-2'>
+                        <span>آدرس: | تلفن:  | پست الکترونیک:</span>
+                        <div className='grid grid-cols-2 gap-4 md:grid-cols-4 container mx-auto'>
+                            <div className=' p-4 rounded-lg flex flex-col items-center justify-center'>
+                                <img src="https://zagros.market/uploads/8f570b58.png" alt="" className='w-24'/>
+                                <p>تحویل پیک</p>
+                            </div>
+                            <div className=' p-4 rounded-lg flex flex-col items-center justify-center'>
+                                <img src="https://zagros.market/uploads/a9286d2f.png" alt="" className='w-20'/>
+                                <p>پشتیبانی همه روزه</p>
+                            </div>
+                            <div className=' p-4 rounded-lg flex flex-col items-center justify-center'>
+                                <img src="https://zagros.market/uploads/22414818.png" alt="" className='w-20'/>
+                                <p>پرداخت سریع و راحت</p>
+                            </div>
+                            <div className=' p-4 rounded-lg flex flex-col items-center justify-center'>
+                                <img src="https://zagros.market/uploads/fdb293e6.png" alt="" className='w-18'/>
+                                <p>ضمانت اصل بودن کالا</p>
+                            </div>
+                        </div>
+                    </section>
+                    <section className='px-4 pb-2 border-b border-accent'>
+                        <div className='grid grid-cols-2 gap-4 md:grid-cols-4 container mx-auto'>
+                            <div className='flex flex-col gap-2'>
+                                <h3>فول مارکت</h3>
+                                <a href="">فرصت‌های شغلی</a>
+                                <a href="">تماس با ما</a>
+                                <a href="">درباره ما</a>
+                            </div>
+                            <div className='flex flex-col gap-2'>
+                                <h3>خدمات مشتریان</h3>
+                                <a href="">سوالات متداول</a>
+                                <a href="">رویه‌های بازگرداندن کالا</a>
+                                <a href="">حریم خصوصی</a>
+                                <a href="">قوانین و مقررات</a>
+                            </div>
+                            <div className='flex flex-col gap-2'>
+                                <h3>راهنمای خرید</h3>
+                                <a href="">نحوه ثبت سفارش</a>
+                                <a href="">شیوه های پرداخت</a>
+                                <a href="">رویه ارسال سفارش</a>
+                            </div>
+                            <div className='flex flex-col gap-2'>
+                                <h3>با ما همراه باشید</h3>
+                                <a href="">
+                                    <Instagram />
                                 </a>
                             </div>
                         </div>
-                        <div className="relative -mb-px aspect-[335/376] w-full shrink-0 overflow-hidden rounded-t-lg bg-[#fff2f2] lg:mb-0 lg:-ml-px lg:aspect-auto lg:w-[438px] lg:rounded-t-none lg:rounded-r-lg dark:bg-[#1D0002]">
-                            <img 
-                                src="/images/shopping-banner.jpg"
-                                alt="Shopping Banner"
-                                className="h-full w-full object-cover"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                            <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-                                <h2 className="mb-2 text-2xl font-bold">Summer Sale</h2>
-                                <p className="text-lg">Up to 50% off on selected items</p>
-                            </div>
+                    </section>
+                    <section className='grid gap-4 md:grid-cols-3 px-4 pb-2 border-b border-accent'>
+                        <div className='flex flex-col gap-2 md:col-span-2'>
+                            <h3>فول مارکت</h3>
+                            <p className='text-xs text-muted-foreground'>فروشگاه بزرگ زاگرس جهت رفاه حال مشتریان عزیز خود اقدام به راه اندازی سیستم ثبت سفارش به صورت آنلاین کرده است</p>
+                            <p className='text-xs text-muted-foreground'>آدرس : خیابان شهیدان نیرنگ(مسجدالرضا) جنب مسجدالرضا | تلفن : 38347772-035</p>
                         </div>
-                    </main>
-                </div>
-                <div className="hidden h-14.5 lg:block"></div>
+                        <div>
+
+                        </div>
+                    </section>
+                    <section className='text-xs text-muted-foreground text-center'>
+                    ©
+                    تمامی حقوق این سایت متعلق به زاگرس مارکت می باشد. |  طراحی و کد نویسی: سپکام سیستم اجرا و توسعه :آژانس دیجیتال مارکتینگ سپتا
+                    </section>
+                </footer>
             </div>
         </>
     );
